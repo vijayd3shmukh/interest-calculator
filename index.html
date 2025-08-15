@@ -1,38 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interest Calculator - Vijay.d3shmukh ©</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return Calculator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-    <h1>💰 Interest Calculator</h1>
-    
-    <label>Amount Given (₹)</label>
-    <input type="number" id="principal" placeholder="Enter amount">
+    <div class="container">
+        <h1>Return Calculator</h1>
 
-    <label>Interest Rate (%)</label>
-    <input type="number" id="rate" placeholder="Enter rate">
+        <input type="number" id="amount" placeholder="Enter Amount">
+        <input type="number" id="rate" placeholder="Interest Rate">
+        <input type="number" id="duration" placeholder="Duration">
 
-    <label>Duration</label>
-    <input type="number" id="duration" placeholder="Enter duration">
-    <select id="unit">
-        <option value="days">Days</option>
-        <option value="months" selected>Months</option>
-        <option value="years">Years</option>
-    </select>
+        <select id="periodType">
+            <option>Days</option>
+            <option>Months</option>
+            <option>Years</option>
+        </select>
 
-    <button onclick="calculateInterest()">Calculate Your Return</button>
+        <button onclick="calculateInterest()">Calculate Your Return</button>
 
-    <div class="result" id="result">
-        <div>Total: ₹<span id="totalAmount">0</span></div>
-        <div>Profit: ₹<span id="profitAmount">0</span></div>
+        <div id="resultBox" class="result-box">
+            <p>Total: <span id="total">₹0</span></p>
+            <p>Profit: <span id="profit">₹0</span></p>
+        </div>
     </div>
-</div>
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
