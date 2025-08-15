@@ -1,105 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #a18cd1, #fbc2eb);
+    background-size: 400% 400%;
+    animation: swirl 15s ease infinite;
+    color: #333;
+    text-align: center;
 }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #f9d8d6, #c8e7f5, #d6f5e3);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@keyframes swirl {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .container {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(10px);
-  padding: 2rem;
-  border-radius: 20px;
-  max-width: 400px;
-  width: 100%;
-  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.85);
+    padding: 20px;
+    margin: 50px auto;
+    border-radius: 15px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+    max-width: 350px;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-  color: #444;
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
 }
 
-.input-group {
-  position: relative;
-  margin-bottom: 1.2rem;
-}
-
-.input-group input,
-.input-group select {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  outline: none;
-  background: rgba(255, 255, 255, 0.9);
-  font-size: 1rem;
-}
-
-.input-group label {
-  position: absolute;
-  top: 50%;
-  left: 12px;
-  transform: translateY(-50%);
-  background: white;
-  padding: 0 4px;
-  font-size: 0.9rem;
-  color: #888;
-  pointer-events: none;
-  transition: 0.2s;
-}
-
-.input-group input:focus + label,
-.input-group input:valid + label,
-.input-group select:focus + label {
-  top: -8px;
-  left: 8px;
-  font-size: 0.75rem;
-  color: #555;
-}
-
-.result {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 1rem;
-  border-radius: 12px;
-  text-align: center;
-  margin-top: 1.5rem;
-  animation: fadeInScale 0.3s ease;
-}
-
-.total-amount {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #28a745;
-  margin-bottom: 0.3rem;
+#result {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: green;
+    min-height: 24px;
 }
 
 footer {
-  text-align: center;
-  font-size: 0.8rem;
-  margin-top: 1.5rem;
-  color: #777;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #222;
 }
 
-@keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+#amount-display {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
 }
