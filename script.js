@@ -1,52 +1,61 @@
-// Function to animate number counting
-function animateValue(id, start, end, duration) {
-    const obj = document.getElementById(id);
-    const range = end - start;
-    let startTime = null;
-
-    function step(timestamp) {
-        if (!startTime) startTime = timestamp;
-        const progress = Math.min((timestamp - startTime) / duration, 1);
-        obj.innerText = "₹" + Math.floor(progress * range + start).toLocaleString();
-        if (progress < 1) {
-            requestAnimationFrame(step);
-        }
-    }
-    requestAnimationFrame(step);
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #a8edea, #fed6e3);
+    text-align: center;
+    padding: 20px;
 }
 
-// Main calculation
-function calculateInterest() {
-    const amount = parseFloat(document.getElementById("amount").value) || 0;
-    const rate = parseFloat(document.getElementById("rate").value) || 0;
-    const duration = parseFloat(document.getElementById("duration").value) || 0;
-    const periodType = document.getElementById("periodType").value;
-
-    let profit = 0;
-
-    if (periodType === "Days") {
-        profit = amount * (rate / 100) * duration;
-    } else if (periodType === "Months") {
-        profit = amount * (rate / 100) * duration;
-    } else if (periodType === "Years") {
-        profit = amount * (rate / 100) * duration;
-    }
-
-    const total = amount + profit;
-
-    // Animate numbers
-    animateValue("total", 0, total, 800);
-    animateValue("profit", 0, profit, 800);
-
-    // Flash effect
-    const resultBox = document.getElementById("resultBox");
-    resultBox.classList.add("flash");
-    setTimeout(() => resultBox.classList.remove("flash"), 600);
+.container {
+    max-width: 400px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
 }
 
-// Add copyright
-document.addEventListener("DOMContentLoaded", () => {
-    const footer = document.createElement("footer");
-    footer.innerHTML = "© " + new Date().getFullYear() + " @vijay.d3shmukh";
-    document.body.appendChild(footer);
-});
+h1 {
+    margin-bottom: 20px;
+}
+
+input, select, button {
+    width: 90%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+button {
+    background: #ff758c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #ff4b6e;
+}
+
+.result-box {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #f9f9f9;
+}
+
+.flash {
+    animation: flash-bg 0.6s ease;
+}
+
+@keyframes flash-bg {
+    0% { background-color: #d4edda; }
+    100% { background-color: transparent; }
+}
+
+footer {
+    font-size: 12px;
+    margin-top: 20px;
+    color: gray;
+}
