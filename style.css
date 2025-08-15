@@ -1,62 +1,61 @@
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to bottom, #f9f9f9, #ffe6cc);
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #fff8f0, #ffe7cc);
     margin: 0;
     padding: 0;
-}
-
-.container {
-    max-width: 500px;
-    margin: auto;
-    padding: 20px;
     text-align: center;
 }
 
+.container {
+    max-width: 400px;
+    margin: 30px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
 h1 {
-    color: #ff8800;
+    color: orange;
 }
 
 label {
     display: block;
-    margin: 15px 0 5px;
+    margin-top: 10px;
     font-weight: bold;
 }
 
-input, select, button {
+input, select {
+    width: 100%;
     padding: 8px;
-    margin: 5px;
-    border-radius: 5px;
+    margin-top: 5px;
     border: 1px solid #ccc;
-}
-
-button {
-    background-color: #ff8800;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover {
-    background-color: #ff6600;
-    transform: scale(1.05);
-}
-
-#result {
-    margin-top: 20px;
-    background: white;
-    padding: 10px;
     border-radius: 8px;
-    box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+    font-size: 16px;
 }
 
-.emoji {
-    position: fixed;
-    font-size: 24px;
-    animation: fall 2s linear forwards;
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    background: #fef6e4;
+    border-radius: 10px;
+    font-size: 18px;
+    transition: background 0.5s ease;
 }
 
-@keyframes fall {
-    from { transform: translateY(-50px); opacity: 1; }
-    to { transform: translateY(100vh); opacity: 0; }
+.money-emoji {
+    position: absolute;
+    font-size: 20px;
+    animation: floatUp 1s ease forwards;
+}
+
+@keyframes floatUp {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-40px); }
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
 }
