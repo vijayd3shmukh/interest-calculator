@@ -1,41 +1,43 @@
-function calculateLending() {
-    const amount = parseFloat(document.getElementById("amount").value) || 0;
-    const rate = parseFloat(document.getElementById("rate").value) || 0;
-    const ratePeriod = document.getElementById("ratePeriod").value;
-    const duration = parseFloat(document.getElementById("duration").value) || 0;
-    const durationPeriod = document.getElementById("durationPeriod").value;
+const principal = document.getElementById("principal");
+const rate = document.getElementById("rate");
+const ratePeriod = document.getElementById("ratePeriod");
+const time = document.getElementById("time");
+const timeUnit = document.getElementById("timeUnit");
+const result = document.getElementById("result");
 
-    if (amount <= 0 || rate <= 0 || duration <= 0) {
-        document.getElementById("resultBox").classList.remove("show");
-        return;
-    }
+function calculate() {
+  const p = parseFloat(principal.value) || 0;
+  const r = parseFloat(rate.value) || 0;
+  const t = parseFloat(time.value) || 0;
+  const rateType = ratePeriod.value;
+  const timeType = timeUnit.value;
 
-    const periodToDays = { day: 1, month: 30, year: 365 };
-    const rateDays = periodToDays[ratePeriod];
-    const durationDays = periodToDays[durationPeriod];
+  let yearlyRate;
+  if (rateType === "year") yearlyRate = r;
+  else if (rateType === "month") yearlyRate = r * 12;
+  else if (rateType === "day") yearlyRate = r * 365;
 
-    const dailyRate = rate / 100 / rateDays;
-    const totalDays = duration * durationDays;
+  let timeInYears;
+  if (timeType === "years") timeInYears = t;
+  else if (timeType === "months") timeInYears = t / 12;
+  else if (timeType === "days") timeInYears = t / 365;
 
-    const profit = amount * dailyRate * totalDays;
-    const total = amount + profit;
+  const interest = (p * yearlyRate * timeInYears) / 100;
+  const total = p + interest;
 
-    document.getElementById("totalAmount").innerText = `₹${total.toFixed(2)}`;
-    document.getElementById("message").innerText =
-        `You will receive ₹${total.toFixed(2)} total with ₹${profit.toFixed(2)} interest, at ${rate}% per ${ratePeriod} for ${duration} ${durationPeriod}(s).`;
+  result.innerHTML = `
+    <div class="total-amount">₹${total.toFixed(2)}</div>
+    <p>You will receive ₹${total.toFixed(2)} total with ₹${interest.toFixed(2)} interest,
+    at ${r}% per ${rateType} for ${t} ${timeType}(s).</p>
+  `;
 
-    const resultBox = document.getElementById("resultBox");
-    resultBox.classList.remove("hidden");
-    setTimeout(() => resultBox.classList.add("show"), 10);
+  result.style.animation = "none";
+  result.offsetHeight; // trigger reflow
+  result.style.animation = "fadeInScale 0.3s ease";
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    // Live calculation on input change
-    document.querySelectorAll("#amount, #rate, #ratePeriod, #duration, #durationPeriod")
-        .forEach(el => el.addEventListener("input", calculateLending));
-
-    // Add copyright
-    const footer = document.createElement("footer");
-    footer.innerHTML = "© " + new Date().getFullYear() + " @vijay.d3shmukh";
-    document.body.appendChild(footer);
+[principal, rate, ratePeriod, time, timeUnit].forEach(input => {
+  input.addEventListener("input", calculate);
 });
+
+calculate();
