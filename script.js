@@ -1,43 +1,39 @@
-const principal = document.getElementById("principal");
-const rate = document.getElementById("rate");
-const ratePeriod = document.getElementById("ratePeriod");
-const time = document.getElementById("time");
-const timeUnit = document.getElementById("timeUnit");
-const result = document.getElementById("result");
-
-function calculate() {
-  const p = parseFloat(principal.value) || 0;
-  const r = parseFloat(rate.value) || 0;
-  const t = parseFloat(time.value) || 0;
-  const rateType = ratePeriod.value;
-  const timeType = timeUnit.value;
-
-  let yearlyRate;
-  if (rateType === "year") yearlyRate = r;
-  else if (rateType === "month") yearlyRate = r * 12;
-  else if (rateType === "day") yearlyRate = r * 365;
-
-  let timeInYears;
-  if (timeType === "years") timeInYears = t;
-  else if (timeType === "months") timeInYears = t / 12;
-  else if (timeType === "days") timeInYears = t / 365;
-
-  const interest = (p * yearlyRate * timeInYears) / 100;
-  const total = p + interest;
-
-  result.innerHTML = `
-    <div class="total-amount">₹${total.toFixed(2)}</div>
-    <p>You will receive ₹${total.toFixed(2)} total with ₹${interest.toFixed(2)} interest,
-    at ${r}% per ${rateType} for ${t} ${timeType}(s).</p>
-  `;
-
-  result.style.animation = "none";
-  result.offsetHeight; // trigger reflow
-  result.style.animation = "fadeInScale 0.3s ease";
+function updateAmountLabel() {
+    const principal = document.getElementById("principal").value || 0;
+    document.getElementById("amount-display").textContent = `Amount: ₹${parseFloat(principal).toFixed(2)}`;
 }
 
-[principal, rate, ratePeriod, time, timeUnit].forEach(input => {
-  input.addEventListener("input", calculate);
-});
+function calculateInterest() {
+    let principal = parseFloat(document.getElementById("principal").value);
+    let rate = parseFloat(document.getElementById("rate").value);
+    let time = parseFloat(document.getElementById("time").value);
+    let interestRateType = document.getElementById("interestRateType").value;
+    let timeType = document.getElementById("timeType").value;
 
-calculate();
+    if (isNaN(principal) || isNaN(rate) || isNaN(time)) {
+        document.getElementById("result").textContent = "";
+        return;
+    }
+
+    // Adjust rate per year
+    if (interestRateType === "month") {
+        rate = rate * 12;
+    } else if (interestRateType === "day") {
+        rate = rate * 365;
+    }
+
+    // Adjust time in years
+    if (timeType === "month") {
+        time = time / 12;
+    } else if (timeType === "day") {
+        time = time / 365;
+    }
+
+    let amount = principal * Math.pow((1 + (rate / 100)), time);
+    let profit = amount - principal;
+
+    document.getElementById("result").innerHTML = `
+        You will receive <span style="color:green">₹${amount.toFixed(2)}</span> 
+        with a profit of <span style="color:blue">₹${profit.toFixed(2)}</span>
+    `;
+}
