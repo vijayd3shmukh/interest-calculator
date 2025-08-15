@@ -1,61 +1,50 @@
-body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #a8edea, #fed6e3);
-    text-align: center;
-    padding: 20px;
+function calculateLending() {
+    const amount = parseFloat(document.getElementById("amount").value) || 0;
+    const rate = parseFloat(document.getElementById("rate").value) || 0;
+    const ratePeriod = document.getElementById("ratePeriod").value;
+    const duration = parseFloat(document.getElementById("duration").value) || 0;
+    const durationPeriod = document.getElementById("durationPeriod").value;
+
+    if (amount <= 0 || rate <= 0 || duration <= 0) {
+        document.getElementById("message").innerText = "Please fill all fields correctly.";
+        return;
+    }
+
+    // Convert all to days for calculation
+    const periodToDays = { day: 1, month: 30, year: 365 };
+    const rateDays = periodToDays[ratePeriod];
+    const durationDays = periodToDays[durationPeriod];
+
+    // Daily interest rate based on rate period
+    const dailyRate = rate / 100 / rateDays;
+
+    // Total days of lending
+    const totalDays = duration * durationDays;
+
+    // Interest calculation (simple interest)
+    const profit = amount * dailyRate * totalDays;
+    const total = amount + profit;
+
+    // Clear cache by resetting fields
+    document.getElementById("amount").value = "";
+    document.getElementById("rate").value = "";
+    document.getElementById("duration").value = "";
+    document.getElementById("ratePeriod").selectedIndex = 0;
+    document.getElementById("durationPeriod").selectedIndex = 0;
+
+    // Output message
+    document.getElementById("message").innerText = 
+        `You will receive ₹${total.toFixed(2)} total with ₹${profit.toFixed(2)} interest, at ${rate}% per ${ratePeriod} for ${duration} ${durationPeriod}(s).`;
+
+    // Flash animation
+    const resultBox = document.getElementById("resultBox");
+    resultBox.classList.add("flash");
+    setTimeout(() => resultBox.classList.remove("flash"), 600);
 }
 
-.container {
-    max-width: 400px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-}
-
-h1 {
-    margin-bottom: 20px;
-}
-
-input, select, button {
-    width: 90%;
-    padding: 10px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-}
-
-button {
-    background: #ff758c;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-button:hover {
-    background: #ff4b6e;
-}
-
-.result-box {
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 10px;
-    background: #f9f9f9;
-}
-
-.flash {
-    animation: flash-bg 0.6s ease;
-}
-
-@keyframes flash-bg {
-    0% { background-color: #d4edda; }
-    100% { background-color: transparent; }
-}
-
-footer {
-    font-size: 12px;
-    margin-top: 20px;
-    color: gray;
-}
+// Add copyright
+document.addEventListener("DOMContentLoaded", () => {
+    const footer = document.createElement("footer");
+    footer.innerHTML = "© " + new Date().getFullYear() + " @vijay.d3shmukh";
+    document.body.appendChild(footer);
+});
