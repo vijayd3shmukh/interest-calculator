@@ -1,61 +1,75 @@
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #a8edea, #fed6e3);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
     text-align: center;
     padding: 20px;
+    color: white;
 }
 
 .container {
     max-width: 400px;
     margin: auto;
-    background: white;
+    background: rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 15px;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
 }
 
 h1 {
     margin-bottom: 20px;
 }
 
-input, select, button {
+input, select {
     width: 90%;
     padding: 10px;
     margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-}
-
-button {
-    background: #ff758c;
-    color: white;
     border: none;
-    cursor: pointer;
-    font-size: 16px;
+    border-radius: 8px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
 }
 
-button:hover {
-    background: #ff4b6e;
+input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .result-box {
     margin-top: 20px;
     padding: 15px;
-    border-radius: 10px;
-    background: #f9f9f9;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.4s ease;
 }
 
-.flash {
-    animation: flash-bg 0.6s ease;
+.result-box.show {
+    transform: scale(1);
+    opacity: 1;
 }
 
-@keyframes flash-bg {
-    0% { background-color: #d4edda; }
-    100% { background-color: transparent; }
+.result-value {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #ffeb3b;
+    margin-bottom: 5px;
+}
+
+.result-detail {
+    font-size: 0.9rem;
+    color: white;
+    line-height: 1.4;
 }
 
 footer {
     font-size: 12px;
     margin-top: 20px;
-    color: gray;
+    color: rgba(255,255,255,0.7);
+}
+
+.hidden {
+    display: none;
 }
