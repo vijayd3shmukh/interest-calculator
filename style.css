@@ -1,55 +1,62 @@
 body {
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
     font-family: Arial, sans-serif;
-    color: white;
+    background: linear-gradient(135deg, #a8edea, #fed6e3);
     text-align: center;
     padding: 20px;
 }
 
 .container {
-    max-width: 350px;
+    max-width: 400px;
     margin: auto;
-    background: rgba(255, 255, 255, 0.1);
+    background: white;
     padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0,255,0,0.4);
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    margin-bottom: 20px;
 }
 
 input, select, button {
     width: 90%;
     padding: 10px;
-    margin: 10px 0;
-    border: none;
+    margin: 8px 0;
+    border: 1px solid #ccc;
     border-radius: 8px;
-    font-size: 1rem;
 }
 
 button {
-    background: #00ff7f;
-    color: black;
-    font-weight: bold;
+    background: #ff758c;
+    color: white;
+    border: none;
     cursor: pointer;
-    transition: all 0.3s;
+    font-size: 16px;
+    transition: background 0.3s;
 }
 
 button:hover {
-    background: #00cc66;
+    background: #ff4b6e;
 }
 
-.result {
+.result-box {
     margin-top: 20px;
-    font-size: 1.2rem;
     padding: 15px;
     border-radius: 10px;
-    background: rgba(0,0,0,0.3);
-    box-shadow: 0 0 15px #00ff7f;
+    background: #f9f9f9;
 }
 
-.glow {
-    animation: glowPulse 1.5s infinite alternate;
+.flash {
+    animation: flash-bg 0.6s ease;
 }
 
-@keyframes glowPulse {
-    0% { box-shadow: 0 0 15px #00ff7f; }
-    100% { box-shadow: 0 0 30px #00ff7f; }
+@keyframes flash-bg {
+    0% { background-color: #d4edda; }
+    100% { background-color: transparent; }
+}
+
+footer {
+    font-size: 12px;
+    margin-top: 20px;
+    color: gray;
 }
