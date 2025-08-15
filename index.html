@@ -1,37 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interest Calculator</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lending Interest Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(-45deg, #00c6ff, #0072ff, #00c6ff, #0072ff);
+        background-size: 400% 400%;
+        animation: gradientSwirl 8s ease infinite;
+    }
+    @keyframes gradientSwirl {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .card {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        max-width: 350px;
+        width: 90%;
+        color: white;
+        text-align: center;
+    }
+    h1 {
+        margin-bottom: 20px;
+        font-size: 1.6rem;
+    }
+    .form-group {
+        margin-bottom: 15px;
+        text-align: left;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    input, select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+        font-size: 1rem;
+        box-sizing: border-box;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        outline: none;
+    }
+    .inline-group {
+        display: flex;
+        gap: 10px;
+    }
+    .inline-group input {
+        flex: 2;
+    }
+    .inline-group select {
+        flex: 1;
+    }
+    .result {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.2);
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #ffeb3b;
+    }
+    .desc {
+        font-size: 0.9rem;
+        margin-top: 5px;
+        color: #fff;
+    }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Interest Calculator</h1>
 
-        <label id="amount-display">Amount: ₹0.00</label>
-        <input type="number" id="principal" placeholder="Enter amount" oninput="updateAmountLabel(); calculateInterest()">
-
-        <select id="interestRateType" onchange="calculateInterest()">
-            <option value="year">Per Year</option>
-            <option value="month">Per Month</option>
-            <option value="day">Per Day</option>
-        </select>
-        <input type="number" id="rate" placeholder="Interest rate (%)" oninput="calculateInterest()">
-
-        <select id="timeType" onchange="calculateInterest()">
-            <option value="year">Years</option>
-            <option value="month">Months</option>
-            <option value="day">Days</option>
-        </select>
-        <input type="number" id="time" placeholder="Duration" oninput="calculateInterest()">
-
-        <div id="result"></div>
+<div class="card">
+    <h1>Lending Interest Calculator</h1>
+    
+    <div class="form-group">
+        <label>Amount</label>
+        <input type="number" id="amount" value="5000">
     </div>
+    
+    <div class="form-group">
+        <label>Interest %</label>
+        <div class="inline-group">
+            <input type="number" id="rate" value="10">
+            <select id="rateType">
+                <option value="year">Per Year</option>
+                <option value="month">Per Month</option>
+                <option value="day">Per Day</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label>Duration</label>
+        <div class="inline-group">
+            <input type="number" id="duration" value="1">
+            <select id="durationType">
+                <option value="months">Months</option>
+                <option value="years">Years</option>
+                <option value="days">Days</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="result" id="result">₹0.00</div>
+    <div class="desc" id="desc"></div>
+</div>
 
-    <footer>© vijay.d3shmukh</footer>
+<script>
+function calculateInterest() {
+    let amount = parseFloat(document.getElementById("amount").value) || 0;
+    let rate = parseFloat(document.getElementById("rate").value) || 0;
+    let rateType = document.getElementById("rateType").value;
+    let duration = parseFloat(document.getElementById("duration").value) || 0;
+    let durationType = document.getElementById("durationType").value;
 
-    <script src="script.js"></script>
+    // Convert rate to yearly
+    if (rateType === "month") rate *= 12;
+    if (rateType === "day") rate *= 365;
+
+    // Convert duration to years
+    if (durationType === "months") duration /= 12;
+    if (durationType === "days") duration /= 365;
+
+    let interest = amount * (rate / 100) * duration;
+    let total = amount + interest;
+
+    document.getElementById("result").innerText = `₹${total.toFixed(2)}`;
+    document.getElementById("desc").innerText =
+        `You will receive ₹${total.toFixed(2)} total with ₹${interest.toFixed(2)} interest, at ${document.getElementById("rate").value}% ${rateType}, for ${document.getElementById("duration").value} ${durationType}.`;
+}
+
+document.querySelectorAll("input, select").forEach(el => {
+    el.addEventListener("input", calculateInterest);
+});
+
+calculateInterest();
+</script>
+
 </body>
 </html>
