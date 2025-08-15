@@ -7,39 +7,42 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="container">
         <h1>💰 Lend Return Calculator</h1>
 
-        <label>Amount Given (₹)</label>
-        <input type="number" id="amount" placeholder="Enter amount" min="1">
+        <label>Amount Given (₹)
+            <input type="number" id="amount" placeholder="Enter amount">
+        </label>
 
-        <label>Interest Rate (%)</label>
-        <select id="interestRate">
-            <option value="5">5%</option>
-            <option value="10">10%</option>
-            <option value="15">15%</option>
-            <option value="custom">Custom</option>
-        </select>
-        <input type="number" id="customRate" placeholder="Custom rate %" style="display:none;">
+        <label>Interest Rate (%)
+            <select id="rate">
+                <option>5</option>
+                <option>10</option>
+                <option>15</option>
+                <option>20</option>
+            </select>
+        </label>
 
-        <label>Time Duration</label>
-        <input type="number" id="timeValue" placeholder="Enter time" min="1">
-        <select id="timeUnit">
-            <option value="year">Years</option>
-            <option value="month">Months</option>
-            <option value="day">Days</option>
-        </select>
+        <label>Time Duration
+            <input type="number" id="time" placeholder="Enter time">
+            <select id="timeUnit">
+                <option value="years">Years</option>
+                <option value="months">Months</option>
+                <option value="days">Days</option>
+            </select>
+        </label>
 
-        <button id="calculateBtn">Calculate Your Return</button>
+        <button id="calcBtn">✨ Calculate Your Return</button>
 
-        <div class="result">
-            <h2>Total: <span id="totalAmount">₹0</span></h2>
-            <h3>Profit: <span id="profit">₹0</span></h3>
+        <div id="result">
+            <h2>Total: ₹<span id="total">0</span></h2>
+            <h3>Profit: ₹<span id="profit">0</span></h3>
         </div>
-    </div>
 
-    <footer>© Vijay.D3shmukh</footer>
+        <div id="emojiRain"></div>
+
+        <footer>© Vijay.D3shmukh</footer>
+    </div>
 
     <script src="script.js"></script>
 </body>
