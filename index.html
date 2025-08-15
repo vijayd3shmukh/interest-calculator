@@ -1,106 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VJ Lend – Compound Interest</title>
-  <meta name="theme-color" content="#0fd976" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interest Calculator - Vijay.d3shmukh ©</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- animated background layers -->
-  <div class="bg"></div>
-  <div class="blob b1"></div>
-  <div class="blob b2"></div>
 
-  <main class="wrap">
-    <header class="hero">
-      <div class="logo">💸</div>
-      <h1>VJ Lend — Compound Interest</h1>
-      <p class="tag">Stress-free lending • Bank-style compounding • One tap</p>
-    </header>
+<div class="container">
+    <h1>💰 Interest Calculator</h1>
+    
+    <label>Amount Given (₹)</label>
+    <input type="number" id="principal" placeholder="Enter amount">
 
-    <section class="card" id="inputCard">
-      <h2>Inputs</h2>
+    <label>Interest Rate (%)</label>
+    <input type="number" id="rate" placeholder="Enter rate">
 
-      <label class="field">
-        <span>Amount Given (₹)</span>
-        <input id="amount" type="number" inputmode="decimal" min="0" value="100000" placeholder="e.g. 25000" />
-      </label>
+    <label>Duration</label>
+    <input type="number" id="duration" placeholder="Enter duration">
+    <select id="unit">
+        <option value="days">Days</option>
+        <option value="months" selected>Months</option>
+        <option value="years">Years</option>
+    </select>
 
-      <div class="row">
-        <label class="field">
-          <span>Interest Rate (% p.a.)</span>
-          <input id="rate" type="number" inputmode="decimal" min="0" step="0.01" value="12" />
-          <div class="chips">
-            <button class="chip" data-rate="5">5%</button>
-            <button class="chip" data-rate="10">10%</button>
-            <button class="chip" data-rate="15">15%</button>
-          </div>
-        </label>
+    <button onclick="calculateInterest()">Calculate Your Return</button>
 
-        <label class="field">
-          <span>Compounding</span>
-          <select id="freq">
-            <option value="1">Yearly</option>
-            <option value="4">Quarterly</option>
-            <option value="12" selected>Monthly</option>
-            <option value="365">Daily</option>
-          </select>
-        </label>
-      </div>
+    <div class="result" id="result">
+        <div>Total: ₹<span id="totalAmount">0</span></div>
+        <div>Profit: ₹<span id="profitAmount">0</span></div>
+    </div>
+</div>
 
-      <div class="row">
-        <label class="field">
-          <span>Duration</span>
-          <input id="duration" type="number" inputmode="decimal" min="0" value="12" />
-        </label>
-
-        <label class="field">
-          <span>Unit</span>
-          <select id="unit">
-            <option value="year">Years</option>
-            <option value="month" selected>Months</option>
-            <option value="day">Days</option>
-          </select>
-        </label>
-      </div>
-
-      <button id="calc" class="cta">✨ Calculate Your Return</button>
-      <p class="formula">A = P × (1 + r/n)<sup>n·t</sup> • t in years</p>
-    </section>
-
-    <section class="card result" id="resultCard">
-      <h2>Your Result</h2>
-
-      <div class="pill total">
-        <div class="lbl">Total to receive</div>
-        <div class="num" id="total">₹0.00</div>
-      </div>
-
-      <div class="pill profit">
-        <div class="lbl">Profit</div>
-        <div class="num" id="profit">₹0.00</div>
-      </div>
-
-      <div class="mini">
-        <span id="breakdownP">P = —</span>
-        <span>•</span>
-        <span id="breakdownR">r = —</span>
-        <span>•</span>
-        <span id="breakdownT">t = —</span>
-        <span>•</span>
-        <span id="breakdownN">n = —</span>
-      </div>
-    </section>
-
-    <footer class="foot">© 2025 <b>vijay.d3shmukh</b> — All rights reserved.</footer>
-  </main>
-
-  <!-- FX layers -->
-  <div id="confetti"></div>
-  <div id="coins"></div>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
