@@ -12,7 +12,6 @@
         <h1>Lending Interest Calculator</h1>
 
         <input type="number" id="amount" placeholder="Enter Amount">
-
         <input type="number" id="rate" placeholder="Interest Rate">
 
         <select id="ratePeriod">
@@ -29,10 +28,9 @@
             <option value="year">Years</option>
         </select>
 
-        <button onclick="calculateLending()">Calculate</button>
-
-        <div id="resultBox" class="result-box">
-            <p id="message"></p>
+        <div id="resultBox" class="result-box hidden">
+            <div class="result-value" id="totalAmount"></div>
+            <div class="result-detail" id="message"></div>
         </div>
     </div>
 
