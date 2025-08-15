@@ -7,42 +7,34 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <div class="container">
         <h1>💰 Lend Return Calculator</h1>
 
-        <label>Amount Given (₹)
-            <input type="number" id="amount" placeholder="Enter amount">
-        </label>
+        <label>Amount Given (₹)</label>
+        <input type="number" id="amount" value="100">
 
-        <label>Interest Rate (%)
-            <select id="rate">
-                <option>5</option>
-                <option>10</option>
-                <option>15</option>
-                <option>20</option>
-            </select>
-        </label>
+        <label>Interest Rate (%)</label>
+        <select id="interest">
+            <option value="5">5%</option>
+            <option value="10">10%</option>
+            <option value="15">15%</option>
+        </select>
 
-        <label>Time Duration
-            <input type="number" id="time" placeholder="Enter time">
-            <select id="timeUnit">
-                <option value="years">Years</option>
-                <option value="months">Months</option>
-                <option value="days">Days</option>
-            </select>
-        </label>
+        <label>Time Duration</label>
+        <input type="number" id="duration" value="12">
+        <select id="durationType">
+            <option value="months">Months</option>
+            <option value="years">Years</option>
+        </select>
 
-        <button id="calcBtn">✨ Calculate Your Return</button>
-
-        <div id="result">
-            <h2>Total: ₹<span id="total">0</span></h2>
-            <h3>Profit: ₹<span id="profit">0</span></h3>
+        <div class="result">
+            <p>Total: ₹<span id="total">0</span></p>
+            <p>Profit: ₹<span id="profit">0</span></p>
         </div>
-
-        <div id="emojiRain"></div>
-
-        <footer>© Vijay.D3shmukh</footer>
     </div>
+
+    <footer>© Vijay.D3shmukh</footer>
 
     <script src="script.js"></script>
 </body>
