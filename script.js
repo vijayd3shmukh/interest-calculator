@@ -1,39 +1,54 @@
-function updateAmountLabel() {
-    const principal = document.getElementById("principal").value || 0;
-    document.getElementById("amount-display").textContent = `Amount: ₹${parseFloat(principal).toFixed(2)}`;
-}
+document.addEventListener('DOMContentLoaded', () => {
+    const goalInput = document.getElementById('goal-input');
+    const addGoalBtn = document.getElementById('add-goal-btn');
+    const goalList = document.getElementById('goal-list');
 
-function calculateInterest() {
-    let principal = parseFloat(document.getElementById("principal").value);
-    let rate = parseFloat(document.getElementById("rate").value);
-    let time = parseFloat(document.getElementById("time").value);
-    let interestRateType = document.getElementById("interestRateType").value;
-    let timeType = document.getElementById("timeType").value;
+    let goals = JSON.parse(localStorage.getItem('goals')) || [];
 
-    if (isNaN(principal) || isNaN(rate) || isNaN(time)) {
-        document.getElementById("result").textContent = "";
-        return;
-    }
+    const saveGoals = () => {
+        localStorage.setItem('goals', JSON.stringify(goals));
+    };
 
-    // Adjust rate per year
-    if (interestRateType === "month") {
-        rate = rate * 12;
-    } else if (interestRateType === "day") {
-        rate = rate * 365;
-    }
+    const renderGoals = () => {
+        goalList.innerHTML = '';
+        goals.forEach((goal, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <span class="goal-text ${goal.completed ? 'completed' : ''}">${goal.text}</span>
+                <div class="goal-actions">
+                    <button class="complete-btn" data-index="${index}">${goal.completed ? 'Undo' : 'Complete'}</button>
+                    <button class="delete-btn" data-index="${index}">Delete</button>
+                </div>
+            `;
+            goalList.appendChild(li);
+        });
+    };
 
-    // Adjust time in years
-    if (timeType === "month") {
-        time = time / 12;
-    } else if (timeType === "day") {
-        time = time / 365;
-    }
+    addGoalBtn.addEventListener('click', () => {
+        const goalText = goalInput.value.trim();
+        if (goalText) {
+            goals.push({ text: goalText, completed: false });
+            goalInput.value = '';
+            saveGoals();
+            renderGoals();
+        }
+    });
 
-    let amount = principal * Math.pow((1 + (rate / 100)), time);
-    let profit = amount - principal;
+    goalList.addEventListener('click', (e) => {
+        if (e.target.classList.contains('complete-btn')) {
+            const index = e.target.dataset.index;
+            goals[index].completed = !goals[index].completed;
+            saveGoals();
+            renderGoals();
+        }
 
-    document.getElementById("result").innerHTML = `
-        You will receive <span style="color:green">₹${amount.toFixed(2)}</span> 
-        with a profit of <span style="color:blue">₹${profit.toFixed(2)}</span>
-    `;
-}
+        if (e.target.classList.contains('delete-btn')) {
+            const index = e.target.dataset.index;
+            goals.splice(index, 1);
+            saveGoals();
+            renderGoals();
+        }
+    });
+
+    renderGoals();
+});
